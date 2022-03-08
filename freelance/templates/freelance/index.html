@@ -1,0 +1,261 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link type = "text/css" href = "{% static 'css/style.css' %}" rel = "stylesheet"/>
+  <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}">
+
+	<title>{{ title }}</title>
+</head>
+<body>
+  <div class="wrapper">
+    <header class="header">
+      <div class="header__container _container">
+        <a href="{% url 'home' %}" class="header__logo">TASKstart</a>
+        <nav class="header__menu menu">
+        <ul class="menu__list">
+          {% if request.user.is_authenticated %}
+          <li class="menu__item">
+            <a href="{% url 'craft' %}" class="menu__link">Создать заказ</a>
+          </li>
+          {% endif %}
+          <li class="menu__item">
+            <a href="#rubrica" class="menu__link">Рубрики</a>
+          </li>
+
+
+          <li class="menu__item">
+            <a href="#about" class="menu__link">О нас</a>
+          </li>
+
+          {% if request.user.is_authenticated %}
+              <li class="menu__item">
+              <a href="{% url 'chat' %}" class="chat">Чат</a>
+              </li>
+          {% endif %}
+
+          {% if request.user.is_authenticated %}
+
+          <li class="menu__item">
+          <a href="{% url 'profile' %}" class="menu__link">{{user.username}}</a> | <a class="menu__link-btr" href="{% url 'logout' %}">Выйти</a>
+          </li>
+
+          {% else %}
+          <li class="menu__item">
+            <a href="{% url 'invate' %}" class="menu__link-btr">Вход</a>
+          </li>
+          <li class="menu__item">
+            <a href="{% url 'register' %}" class="menu__link-btr">Регистрация</a>
+          </li>
+          {% endif %}
+          
+
+        </ul>
+        </nav>
+    </div>
+  </header>
+  <main class="page">
+    <div class="page__main-block main-block">
+      <div class="main-block__container _container">
+        <div class="main-block__body">
+          <h1 class="main-block__title">Отдайте задачи фрилансерам и освободите время для важного</h1>
+          <div class="main-block__text">Дизайнеры, разработчики и другие 
+            профессионалы  готовы выполнить вашу задачу
+          </div>
+          <div class="main-block__buttons">
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'profile' %}" class="main-block__button main-block__button_orange">Добро пожаловать {{request.user}} </a>
+            {% else %}
+            <a href="{% url 'register' %}" class="main-block__button main-block__button_orange">Стать клиентом</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="main-block__image _ibg">
+        <img src = "{% static 'images/intro.jpg' %}" alt = ""/>
+      </div>
+    </div>
+</main>
+<section>     
+  {% block content %} 
+    <div id = "rubrica" class="section__title">Выберите рубрику, чтобы начать</div>
+            
+
+            <div class="clients">
+                <div class="clients__item">
+                    <img class="clients__photo" src = "{% static 'images/1.png' %}" alt = "">
+                    <div class="clients__content"></div>
+                        
+                        <div class="clients__prof">Дизайн</div>
+                        <div class="clients__text"></div>
+                            <a class="btn3" href="{% url 'design' %}">Начать </a>
+                </div>
+                    
+
+                <div class="clients__item">
+                    <img class="clients__photo" src = "{% static 'images/2.png' %}" alt = "">
+                    <div class="clients__content">
+                        
+                        <div class="clients__prof">Разработка и IT</div>
+                        <div class="clients__text"></div>
+                        <a class="btn3" href="/categories/development">Начать </a>
+
+                    </div>
+                </div>
+
+                <div class="clients__item">
+                    <img class="clients__photo" src = "{% static 'images/3.png' %}" alt = "">
+                    <div class="clients__content">
+                        
+                        <div class="clients__prof">Соцсети и реклама</div>
+                        <div class="clients__text"></div>
+                        <a class="btn3" href="/categories/promotion">Начать </a>
+
+                    </div>
+                </div>
+
+                <div class="clients__item">
+                    <img class="clients__photo" src = "{% static 'images/4.png' %}" alt = "">
+                    <div class="clients__content">
+                        
+                        <div class="clients__prof">SEO и трафик</div>
+                        <div class="clients__text"></div>
+                        <a class="btn3" href="/categories/seo">Начать </a>
+                    </div>
+                </div>
+
+            <div class="clients__item">
+                <img class="clients__photo" src = "{% static 'images/5.png' %}" alt = "">
+                    <div class="clients__content">
+                        
+                        <div class="clients__prof">Аудио, видео, съемка</div>
+                        <div class="clients__text"></div>
+                        <a class="btn3" href="/categories/audio_video">Начать </a>
+
+                    </div>
+                </div>
+    </div>
+    </div>
+  {% endblock %}
+</section> 
+
+ <section class="section  section--game">                     
+  <div class="game">
+    <div class="_container">
+        
+        <div class="game__inner">
+        <h1 class="game__title">Закажите услуги фрилансеров прямо сейчас</h1>
+        <h1 class="game__title2">Быстро, просто и безопасно!</h1>
+        <a class="game__btn4" href="{% url 'craft' %}">Создать</a>
+        </div>
+      </div>
+  </div>
+</section> 
+
+<section class="section  section--onas"> 
+  <div class="_container">
+<p class="onas__title"><a id="about"><b>TASKstart</b> — это потрясающе удобная фриланс платформа, которая включает:</a></p>
+
+<div class="onas">
+    <div class="onas__item">
+        <div class="onas__prof">Магазин фриланс услуг</div>
+        <div class="onas__text">Хотите экономить деньги, время и нервы? Такая экономия возможна только тогда, когда freelance нацелен на результат. В этом плане Kwork, являясь маркетплейсом, имеет огромное преимущество перед любыми другими биржами исполнителей.
+
+Фрилансеры оформляют свои услуги в виде кворков, которые можно купить в один клик... То есть работа исполнителей продается как товар, а это экономит массу времени, денег и нервов. Идеально подходит для типовых задач: логотипы, баннеры, SEO и др.
+</div>
+    
+    </div>
+    <div class="onas__item">
+        <div class="onas__prof">Биржа фриланса</div>
+        <div class="onas__text">Вы создаете задание, и оно становится доступно тысячам фрилансеров, которые могут отправить вам предложения. Остается только выбрать лучшее и начать работу. Такой подход к удаленной работе – идеальный вариант для решения больших и уникальных задач.
+</div>
+    </div>
+    
+</div>
+</div>
+
+</section>
+		<footer class="footer">
+			<div class="footer__top">
+				<div class="footer__main _container">
+					<div class="footer__row">
+						<div class="footer__column">
+							<div class="footer__label">Информация</div>
+							<nav class="footer__menu menu-footer">
+								<ul class="menu-footer__list">
+									<li class="menu-footer__item">
+										<a href="" class="menu-footer__link">О нас</a>
+									</li>
+									<li class="menu-footer__item">
+										<a href="" class="menu-footer__link">О сайте</a>
+									</li>
+									<li class="menu-footer__item">
+										<a href="" class="menu-footer__link">Обратная связь</a>
+									</li>
+									
+								</ul>
+							</nav>
+						</div>
+						<div class="footer__column">
+							<div class="footer__label">Legal</div>
+							<nav class="footer__menu menu-footer">
+								<ul class="menu-footer__list">
+									<li class="menu-footer__item">
+										<a href="" class="menu-footer__link">О нас</a>
+									</li>
+									<li class="menu-footer__item">
+										<a href="" class="menu-footer__link">О сайте</a>
+									</li>
+									<li class="menu-footer__item">
+										<a href="" class="menu-footer__link">Обратная связь</a>
+									</li>
+									
+								</ul>
+							</nav>
+						</div>
+						<div class="footer__column">
+							<div class="footer__label">Features</div>
+							<nav class="footer__menu menu-footer">
+								<ul class="menu-footer__list">
+									<li class="menu-footer__item">
+										<a href="" class="menu-footer__link">О нас</a>
+									</li>
+									<li class="menu-footer__item">
+										<a href="" class="menu-footer__link">О сайте</a>
+									</li>
+									<li class="menu-footer__item">
+										<a href="{% url 'contact_page' %}" class="menu-footer__link">Обратная связь</a>
+									</li>
+									
+								</ul>
+							</nav>
+						</div>
+						
+						<div class="footer__column">
+							<div class="footer__label">TASKstart</div>
+							<div class="footer__contacts contacts-footer">
+							
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer__buttom">
+				<div class="footer__container _container">
+					<div class="footer__copy">Добро пожаловать к нам </div>
+					<div class="footer__social social">
+						<a href="" class="social__item"><img src="{% static 'images/ico/01.svg' %}" alt="social"></a>
+            <a href="" class="social__item"><img src="{% static 'images/ico/02.svg' %}" alt="social"></a>
+            <a href="" class="social__item"><img src="{% static 'images/ico/03.svg' %}" alt="social"></a>
+            <a href="" class="social__item"><img src="{% static 'images/ico/04.svg' %}" alt="social"></a>
+					</div>
+
+				</div>
+			</div>
+		</footer>
+</div> 
+
+</body>
+</html>

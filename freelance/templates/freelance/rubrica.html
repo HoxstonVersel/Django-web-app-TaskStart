@@ -1,0 +1,156 @@
+{% load static %}
+{% load task_main_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link type = "text/css" href = "{% static 'css/сategories.css' %}" rel = "stylesheet"/>
+	<title>{{ title }}</title>
+</head>
+<body>
+	<div class="wrapper">
+		<header class="header">
+			<div class="header__container _container">
+			  <a href="{% url 'home' %}" class="header__logo">TASKstart</a>
+			  <nav class="header__menu menu">
+				<ul class="menu__list">
+				  <li class="menu__item">
+					<a href="" class="menu__link">Заказы</a>
+				  </li>
+                  {% if request.user.is_authenticated %}
+                        <li class="menu__item">
+                        <a href="/vhod2.html" class="chat">Чат</a>
+                        </li>
+                    {% endif %}
+
+				  {% if request.user.is_authenticated %}
+                    <li class="menu__item">
+                        <a href="{% url 'profile' %}" class="menu__link">{{user.username}}</a> | <a class="menu__link-btr" href="{% url 'logout' %}">Выйти</a>
+                    </li>
+
+                    {% else %}
+                    <li class="menu__item">
+                        <a href="{% url 'invate' %}" class="menu__link-btr">Вход</a>
+                    </li>
+                    <li class="menu__item">
+                        <a href="{% url 'register' %}" class="menu__link-btr">Регистрация</a>
+                    </li>
+                {% endif %}
+				</ul>
+			  </nav>
+			</div>
+	    </header>
+        <main>
+
+<div class="_container">
+    <div class="clients_container">
+        {% getmaincats as main_categories %}
+            {% for m in main_categories %}
+                    <div class="clients">
+                        <div class="clients__item">
+                            <a href=""><img width=180px" height=180px" src = "{{m.photo.url}}"></a>
+                            <li class="selected clients__text">{{m.name}}</li>
+                        </div>
+                    </div>
+            {% endfor %}
+    </div>
+    <div class="stolb_block">
+        <div class="stolb_text">
+            <ul class="menu-stolb__list">
+                
+                <li class="menu-stolb__item">
+                    <a href="" class="menu-stolb__link1">Рубрики</a>
+                </li>
+                {% for m in main_categories %}
+                        <li class="selected menu-stolb__item">{{m.name}}</li>
+                        <li><a  href="" class="menu-stolb__link">{{m.name}}</a></li>
+                {% endfor %}
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+</main>
+<footer class="footer">
+    <div class="footer__top">
+        <div class="footer__main _container">
+            <div class="footer__row">
+                <div class="footer__column">
+                    <div class="footer__label">Company Info</div>
+                    <nav class="footer__menu menu-footer">
+                        <ul class="menu-footer__list">
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">About Us</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">Carrier</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">We are hiring</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer__column">
+                    <div class="footer__label">Legal</div>
+                    <nav class="footer__menu menu-footer">
+                        <ul class="menu-footer__list">
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">About Us</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">Carrier</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">We are hiring</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer__column">
+                    <div class="footer__label">Features</div>
+                    <nav class="footer__menu menu-footer">
+                        <ul class="menu-footer__list">
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">About Us</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">Carrier</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">We are hiring</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                
+                <div class="footer__column">
+                    <div class="footer__label">TASKstart</div>
+                    <div class="footer__contacts contacts-footer">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer__buttom">
+        <div class="footer__container _container">
+            <div class="footer__copy">Добро пожаловать к нам </div>
+            <div class="footer__social social">
+                <a href="" class="social__item"><img src="{% static 'images/ico/01.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/02.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/03.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/04.svg' %}" alt="social"></a>
+            </div>
+
+        </div>
+    </div>
+</footer>
+</div>
+</body>
+</html>

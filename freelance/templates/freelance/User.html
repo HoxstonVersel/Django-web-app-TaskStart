@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href = "{% static 'css/User.css' %}">
+    <title>Личный кабинет</title>
+</head>
+<body>
+ <div class="wrapper">
+<header class="header">
+	<div class="header__container _container">
+        <a href="{% url 'home' %}" class="header__logo">TASKstart</a>
+        <nav class="header__menu menu">
+          <ul class="menu__list">
+            
+            <li class="menu__item">
+              <a href="{% url 'craft' %}" class="menu__link">Создать заказ</a>
+            </li>
+            <li class="menu__item">
+              <a href="{% url 'main_category' %}" class="menu__link">Рубрики</a>
+            </li>
+           
+            {% if request.user.is_authenticated %}
+            <li class="menu__item">
+              <a href="/vhod2.html" class="chat">Чат</a>
+            </li>
+            {% endif %}
+            
+            {% if request.user.is_authenticated %}
+
+            <li class="menu__item">
+                <a class="menu__link" href="{% url 'profile' %}" > {{user.username}}  | <a class="menu__link-btr" href="{% url 'logout' %}">Выйти</a></li>
+            </li>
+  
+            {% else %}
+            <li class="menu__item">
+              <a href="{% url 'invate' %}" class="menu__link-btr">Вход</a>
+            </li>
+            <li class="menu__item">
+              <a href="{% url 'register' %}" class="menu__link-btr">Регистрация</a>
+            </li>
+            {% endif %}
+
+          </ul>
+        </nav>
+      </div> 
+</header>
+<section>
+        <div class="_container">
+            <div class="info-box">
+                <div class="info">
+                        <a href="" class="info_foto">
+                            {% if profile.avatar %}
+                                <img width="130px" height="130px" src="{{profile.avatar.url}}" alt="Банер заказа">
+                            {% endif %}
+                        </a>
+
+                        <div class="info_text">
+                            <ul>
+                                <li class="info-item"><b>Имя:</b>            {{profile.name}}</li>
+                                <li class="info-item"><b>Фамилия:</b>        {{profile.surname}} </li>
+                                <li class="info-item"><b>Email:</b>          {{profile.user.email}}</li>
+                                <li class="info-item"><b>Номер телефона:</b> {{profile.phone_number}}</li>
+                                <li class="info-item"><b>Опыт работы:</b>    {{profile.experience}}</li>
+                                <li class="info-item"><b>Знание языков:</b>  {{profile.launguage}}</li>
+                            </ul>
+                        </div>
+
+                        <div class="info_text">
+                            <a href="{{profile.instagram}}" class="info-item">
+                                <img width="40px" height="40px" src="{% static 'images/Instagram_white.png'  %}" alt="Инста"></a>
+                                
+                            <a href="{{profile.twitter}}" class="info-item">
+                                <img width="40px" height="40px" src="{% static 'images/Twitter_white.png'  %}" alt="Твиттер"></a>
+                                
+                            <a href="{{profile.facebook}}" class="info-item">
+                                <img width="40px" height="40px" src="{% static 'images/Facebook_white.png'  %}" alt="Facebook"></a>
+                        </div>
+                </div>
+                            <div class="lich-info">
+                                <div class="lich-info_border">
+                                    <div class="lich-info_text">
+                                        <h3>Личная информация</h3>
+                                    </div>
+                                    <div class="lich-info_prof">
+                                        <p>{{profile.about}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% if request.user == profile.user %}
+                            <a href="{% url 'edit_profile' %}" type="submit" class="edit-info_btr">Редактивировать</a>    
+                            {% endif %}
+
+                            {% for post in post_list %}
+                                <strong>
+                                    {{post_list.title}}:
+                                    <br></br>
+                                    {{post_list.time_create}}
+                                </strong>
+                            {% endfor %}
+            </div>
+        </div>
+</section>
+<footer class="footer">
+    <div class="footer__top">
+        <div class="footer__main _container">
+            <div class="footer__row">
+                <div class="footer__column">
+                    <div class="footer__label">Company Info</div>
+                    <nav class="footer__menu menu-footer">
+                        <ul class="menu-footer__list">
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">About Us</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">Carrier</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">We are hiring</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer__column">
+                    <div class="footer__label">Legal</div>
+                    <nav class="footer__menu menu-footer">
+                        <ul class="menu-footer__list">
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">About Us</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">Carrier</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">We are hiring</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer__column">
+                    <div class="footer__label">Features</div>
+                    <nav class="footer__menu menu-footer">
+                        <ul class="menu-footer__list">
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">About Us</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">Carrier</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">We are hiring</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                
+                <div class="footer__column">
+                    <div class="footer__label">TASKstart</div>
+                    <div class="footer__contacts contacts-footer">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer__buttom">
+        <div class="footer__container _container">
+            <div class="footer__copy">Добро пожаловать к нам </div>
+            <div class="footer__social social">
+                <a href="" class="social__item"><img src="{% static 'images/ico/01.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/02.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/03.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/04.svg' %}" alt="social"></a>
+            </div>
+        </div>
+    </div>
+</footer>
+ </div>   
+</body>
+</html>

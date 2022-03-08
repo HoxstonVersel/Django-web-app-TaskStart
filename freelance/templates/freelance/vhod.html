@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link type = "text/css" href = "{% static 'css/vhod2.css' %}" rel = "stylesheet"/>
+	<title>Вход</title>
+</head>
+<body>
+	<div class="wrapper">
+		<header class="header">
+			<div class="header__container _container">
+			  <a href="{% url 'home' %}" class="header__logo">TASKstart</a>
+			  <nav class="header__menu menu">
+				<ul class="menu__list">
+				  <li class="menu__item">
+					<a href="" class="menu__link">Заказы</a>
+				  </li>
+				  <li class="menu__item">
+					<a href="" class="menu__link">Услуги</a>
+				  </li>
+				  <li class="menu__item">
+					<a href="/vhod2.html" class="menu__link">Вход</a>
+				  </li>
+				</ul>
+			  </nav>
+			</div>
+		  </header>
+
+
+<main class="page">
+  <div class="intro">
+		<div class="_container">
+			<form class="box" method="post">
+				{% csrf_token %}
+				<div class="form-error">{{ form.non_field_errors }}</div>
+				
+					<a class="vhod" href="{% url 'invate' %}">Вход</a>
+					<a class="vhod" href="{% url 'register' %}">Регистрация</a>
+					
+					<p class="form-label-all"><label class="form-label" for="{{ form.username.id_for_label }}">{{form.username.label}}: </label>{{ form.username }}</p>
+					<div class="form-error">{{ form.username.errors }}</div>
+
+					<p class="form-label-all"><label class="form-label" for="{{ form.password.id_for_label }}">{{form.password.label}}: </label>{{ form.password }}</p>
+					<div class="form-error">{{ form.password.errors }}</div>
+
+					<input type="submit" name="" value="Войти"></input>
+			</form>
+	
+</main>
+
+<footer class="footer">
+	<div class="footer__top">
+		<div class="footer__main _container">
+			<div class="footer__row">
+				<div class="footer__column">
+					<div class="footer__label">Company Info</div>
+					<nav class="footer__menu menu-footer">
+						<ul class="menu-footer__list">
+							<li class="menu-footer__item">
+								<a href="" class="menu-footer__link">About Us</a>
+							</li>
+							<li class="menu-footer__item">
+								<a href="" class="menu-footer__link">Carrier</a>
+							</li>
+							<li class="menu-footer__item">
+								<a href="" class="menu-footer__link">We are hiring</a>
+							</li>
+							
+						</ul>
+					</nav>
+				</div>
+				<div class="footer__column">
+					<div class="footer__label">Legal</div>
+					<nav class="footer__menu menu-footer">
+						<ul class="menu-footer__list">
+							<li class="menu-footer__item">
+								<a href="" class="menu-footer__link">About Us</a>
+							</li>
+							<li class="menu-footer__item">
+								<a href="" class="menu-footer__link">Carrier</a>
+							</li>
+							<li class="menu-footer__item">
+								<a href="" class="menu-footer__link">We are hiring</a>
+							</li>
+							
+						</ul>
+					</nav>
+				</div>
+				<div class="footer__column">
+					<div class="footer__label">Features</div>
+					<nav class="footer__menu menu-footer">
+						<ul class="menu-footer__list">
+							<li class="menu-footer__item">
+								<a href="" class="menu-footer__link">About Us</a>
+							</li>
+							<li class="menu-footer__item">
+								<a href="" class="menu-footer__link">Carrier</a>
+							</li>
+							<li class="menu-footer__item">
+								<a href="" class="menu-footer__link">We are hiring</a>
+							</li>
+							
+						</ul>
+					</nav>
+				</div>
+				
+				<div class="footer__column">
+					<div class="footer__label">TASKstart</div>
+					<div class="footer__contacts contacts-footer">
+					
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer__buttom">
+		<div class="footer__container _container">
+			<div class="footer__copy">Добро пожаловать к нам </div>
+			<div class="footer__social social">
+				<a href="" class="social__item"><img src="{% static 'images/ico/01.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/02.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/03.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/04.svg' %}" alt="social"></a>
+			</div>
+
+		</div>
+	</div>
+</footer>
+</div>
+</body>
+</html>

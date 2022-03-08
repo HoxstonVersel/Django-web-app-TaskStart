@@ -1,0 +1,210 @@
+{% load static %}
+{% load task_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type = "text/css" href = "{% static 'css/info_task.css' %}" rel = "stylesheet"/>
+    <title>{{post.title}}</title>
+</head>
+
+
+<body>
+    <div class="wrapper">
+        {% comment %} МЕНЮ {% endcomment %}
+        <header class="header">
+            <div class="header__container _container">
+                <a href="{% url 'home' %}" class="header__logo">TASKstart</a>
+                <nav class="header__menu menu">
+                    <ul class="menu__list">
+                        
+                        <li class="menu__item">
+                            <a href="{% url 'craft' %}" class="menu__link">Заказы</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="" class="menu__link">Рубрики</a>
+                        </li>
+
+                        {% if request.user.is_authenticated %}
+                            <li class="menu__item">
+                            <a href="" class="chat">Чат</a>
+                            </li>
+                         {% endif %}
+
+                        {% if request.user.is_authenticated %}
+                            <li class="menu__item">
+                                <a href="{% url 'profile' %}" class="menu__link">{{user.username}}</a> | <a class="menu__link-btr" href="{% url 'logout' %}">Выйти</a>
+                            </li>
+
+                            {% else %}
+                            <li class="menu__item">
+                                <a href="{% url 'invate' %}" class="menu__link-btr">Вход</a>
+                            </li>
+                            <li class="menu__item">
+                                <a href="{% url 'register' %}" class="menu__link-btr">Регистрация</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div> 
+        </header>
+        {% comment %} МЕНЮ {% endcomment %}
+<section>
+<div class="_container">
+    <div class="zadaniya">
+        <div class="zadaniya_foto">
+            <div class="zadaniya_foto-summa">от {{post.price}} тг</div>
+            {% if post.photo %}
+            <img src="{{post.photo.url}}" alt="Банер заказа">
+            {% endif %}
+ 
+        </div>
+    <div class="prodavec">
+        <div class="prodavec_foto">
+            {% if post.user.profile.avatar %}
+            <img src="{{post.user.profile.avatar.url}}" alt="Банер заказа">
+            {% endif %}
+            <a href="{{ post.user.profile.username.get_absolute_url }}" class ="user-profile">{{post.user}}</a>
+            <p>{{post.user.profile.phone_number}}</p>
+        </div>
+     <div class="zadaniya_btr">
+        <a href="profile post.user" class="zadaniya_btr-1">Связаться с продавцов</a> 
+        <a href="" class="zadaniya_btr-1">О продавце</a>
+
+        {% if request.user == post.user %}
+            <td><a href="{% url 'edit_task' post.slug %}" class="zadaniya_btr-2" >Изменить</a></td>
+                <form id = "delete_task" action="" method="post">
+                {% csrf_token %}
+                <button type="submit" class="zadaniya_btr-2">Удалить</button>
+                </form>
+        {% endif %}
+
+     </div>   
+
+    </div>  
+    <div class="o_rabote">
+        <div class="o_rabote-text">
+            <div class="o_rabote-text1">   
+                <h2><b>{{post.title}}</b></h2>
+                <p>{{post.content}}</p>
+             </div>
+        </div>
+    </div>
+    <br></br>
+    <td><a href="{% url 'comment_add' post.slug %}" class="zadaniya_btr-3" >Добавить комментарий</a></td>
+        <div class="o_rabote">  
+            <div class="o_rabote-text">
+            <h2><b>Коментарии:</b></h2>
+            {% for comment in comment_list %}
+                <strong>
+                    <div class="comment">
+                    {{comment.user}}:
+                    {{comment.comment}}
+                    <br></br>
+                    {% if request.user == comment.user %}
+                    <td><a href="" class="zadaniya_btr-2" >Изменить</a></td>
+                    {% endif %}
+                    </div>
+                </strong>
+            {% endfor %}
+            </div>
+        </div>
+        
+    <br></br>
+</div>
+</div>
+</section>
+
+{% comment %} ПОДВАЛ {% endcomment %}
+<footer class="footer">
+    <div class="footer__top">
+        <div class="footer__main _container">
+            <div class="footer__row">
+                <div class="footer__column">
+                    <div class="footer__label">Company Info</div>
+                    <nav class="footer__menu menu-footer">
+                        <ul class="menu-footer__list">
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">About Us</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">Carrier</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">We are hiring</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer__column">
+                    <div class="footer__label">Legal</div>
+                    <nav class="footer__menu menu-footer">
+                        <ul class="menu-footer__list">
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">About Us</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">Carrier</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">We are hiring</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer__column">
+                    <div class="footer__label">Features</div>
+                    <nav class="footer__menu menu-footer">
+                        <ul class="menu-footer__list">
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">About Us</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">Carrier</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">We are hiring</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                
+                <div class="footer__column">
+                    <div class="footer__label">TASKstart</div>
+                    <div class="footer__contacts contacts-footer">
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer__buttom">
+        <div class="footer__container _container">
+            <div class="footer__copy">Добро пожаловать к нам </div>
+            <div class="footer__social social">
+                <a href="" class="social__item"><img src="{% static 'images/ico/01.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/02.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/03.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/04.svg' %}" alt="social"></a>
+            </div>
+
+        </div>
+    </div>
+</footer>
+{% comment %} ПОДВАЛ {% endcomment %}
+
+
+
+
+
+
+
+
+</div> 
+</body>
+</html>

@@ -1,0 +1,34 @@
+{% load static %}
+{% load task_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type = "text/css" href = "{% static 'css/edit.css' %}" rel = "stylesheet"/>
+    <title>{{title}}</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header__container _container">
+          <a href="{% url 'home' %}" class="header__logo">TASKstart</a>
+          <nav class="header__menu menu">
+            <ul class="menu__list">
+                {% if request.user.is_authenticated %}
+                    <li class="menu__item">
+                        <a href="{% url 'profile' %}" class="menu__link">{{user.username}}</a> | <a class="menu__link-btr" href="{% url 'logout' %}">Выйти</a>
+                    </li>
+
+                    {% else %}
+                    <li class="menu__item">
+                        <a href="{% url 'invate' %}" class="menu__link-btr">Вход</a>
+                    </li>
+                    <li class="menu__item">
+                        <a href="{% url 'register' %}" class="menu__link-btr">Регистрация</a>
+                    </li>
+                {% endif %}
+            </ul>
+          </nav>
+        </div>
+    </header>

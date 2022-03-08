@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link type = "text/css" href = "{% static 'css/style.css' %}" rel = "stylesheet"/>
+  <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}">
+ 
+	<title>{{ title }}</title>
+</head>
+<body>
+  <div class="wrapper">
+    <header class="header">
+      <div class="header__container _container">
+        <a href="{% url 'home' %}" class="header__logo">TASKstart</a>
+        <nav class="header__menu menu">
+        <ul class="menu__list">
+          {% if request.user.is_authenticated %}
+          <li class="menu__item">
+            <a href="{% url 'craft' %}" class="menu__link">Создать заказ</a>
+          </li>
+          {% endif %}
+          <li class="menu__item">
+            <a href="#rubrica" class="menu__link">Рубрики</a>
+          </li>
+
+
+          <li class="menu__item">
+            <a href="#about" class="menu__link">О нас</a>
+          </li>
+
+          {% if request.user.is_authenticated %}
+              <li class="menu__item">
+              <a href="" class="chat">Чат</a>
+              </li>
+          {% endif %}
+
+          {% if request.user.is_authenticated %}
+
+          <li class="menu__item">
+          <a href="{% url 'profile' %}" class="menu__link">{{user.username}}</a> | <a class="menu__link-btr" href="{% url 'logout' %}">Выйти</a>
+          </li>
+
+          {% else %}
+          <li class="menu__item">
+            <a href="{% url 'invate' %}" class="menu__link-btr">Вход</a>
+          </li>
+          <li class="menu__item">
+            <a href="{% url 'register' %}" class="menu__link-btr">Регистрация</a>
+          </li>
+          {% endif %}
+          
+
+        </ul>
+        </nav>
+    </div>
+  </header>
+{% block content %}
+
+{% endblock %}
+{% block domready %}
+
+{% endblock %}

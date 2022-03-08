@@ -1,0 +1,296 @@
+{% load static %}
+{% load task_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link type = "text/css" href = "{% static 'css/podrubrika.css' %}" rel = "stylesheet"/>
+	<title>{{cat_id}}</title>
+</head>
+<body>
+	<div class="wrapper">
+            <header class="header">
+                <div class="header_container">
+                <div class="header__container">
+                <a href="{% url 'home' %}" class="header__logo">TASKstart</a>
+                <nav class="header__menu menu">
+                    <ul class="menu__list">
+                    <li class="menu__item">
+                        <a href="" class="menu__link">Заказы</a>
+                    </li>
+                    <li class="menu__item">
+                        <a href="" class="menu__link">Рубрики</a>
+                    </li>
+
+                    {% if request.user.is_authenticated %}
+                        <li class="menu__item">
+                        <a href="/vhod2.html" class="chat">Чат</a>
+                        </li>
+                    {% endif %}
+                    {% if request.user.is_authenticated %}
+                        <li class="menu__item">
+                            <a href="{% url 'profile' %}" class="menu__link">{{user.username}}</a> | <a class="menu__link-btr" href="{% url 'logout' %}">Выйти</a>
+                        </li>
+
+                        {% else %}
+                        <li class="menu__item">
+                            <a href="{% url 'invate' %}" class="menu__link-btr">Вход</a>
+                        </li>
+                        <li class="menu__item">
+                            <a href="{% url 'register' %}" class="menu__link-btr">Регистрация</a>
+                        </li>
+                    {% endif %}
+                    </ul>
+                </nav>
+                </div>
+            </div>
+            </header>
+        <main>
+<div class="_container">
+    <div class="clients_container">
+            {% for task in tasks %}
+                    <div class="clients">
+                        {% if task_info.pk == task_selected %}
+                                <div class="clients__item">
+                                    {% if task.photo %}
+                                        <a href="{{ task.get_absolute_url }}"><img width=230px" height=180px" src="{{task.photo.url}}"></a>
+                                    {% endif %}
+                                <h1>{{task.user}}</h1>
+                                <p>{{task.title}}</p>
+                                <div class="clients__bay">от {{task.price}} тг</div>
+                                </div>
+                            {% else %}
+                                <div class="clients__item">
+                                    <a href="{{ task.get_absolute_url }}"><img width=240px" height=180px" src="{{task.photo.url}}"></a>
+                                    <div class="clients__bay">{{task.price}}</div>
+                                    <div class="clients__text">{{task.contenst}}</div>
+                                </div>
+                        {% endif %}
+                    </div>
+            {% endfor %}
+    </div>
+    <div class="stolb_block">
+        <div class="stolb_text">
+            <ul class="menu-stolb__list">
+                <li class="menu-stolb__item">
+                    <div href="" class="menu-stolb__link1">Логотип</div>
+                </li>
+
+                <li class="menu-stolb__item">
+                    <div href="" class="menu-stolb__link2">Цена</div>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">500р</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">1000-2500р</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">3000-5000р</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">7000р и выше</label>
+                </li>
+
+                <li class="menu-stolb__item">
+                    <div href="" class="menu-stolb__link2">Уровень продавца?</div>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">Новичок или выше</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">Продвинутый или выше</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">Профессионал</label>
+                </li>
+
+                <li class="menu-stolb__item">
+                    <div href="" class="menu-stolb__link2">Активность продавцов</div>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">Онлайн</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">Заходил до 1 дн. назад</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">Заходил до 3 дн. назад</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">Заходил до 1 нед. назад</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">Заходил до 2 нед. назад</label>
+                </li>
+
+                <li class="menu-stolb__item">
+                    <div class="menu-stolb__link2">Положительных отзывов?</div>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">От 1</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">От 5</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">От 20</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">От 100</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <div class="menu-stolb__link2">Срок выполнения?</div>>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">За 24 часа</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">До 2 дней</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">До 3 дней</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">До 5 дней</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">До 10 дней</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">Просмотренные</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">Только не просмотренные</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">Только просмотренные</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">Заказанные</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">Только заказанные</label>
+                </li>
+                <li class="menu-stolb__item">
+                    <input type="checkbox" id="click">
+                    <label for="click" class="menu-stolb__link">Только не заказанные</label>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+</main>
+<footer class="footer">
+    <div class="footer_top">
+        <div class="footer__top">
+        
+            <div class="footer__row">
+                <div class="footer__column">
+                    <div class="footer__label">Company Info</div>
+                    <nav class="footer__menu menu-footer">
+                        <ul class="menu-footer__list">
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">About Us</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">Carrier</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">We are hiring</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer__column">
+                    <div class="footer__label">Legal</div>
+                    <nav class="footer__menu menu-footer">
+                        <ul class="menu-footer__list">
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">About Us</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">Carrier</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">We are hiring</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer__column">
+                    <div class="footer__label">Features</div>
+                    <nav class="footer__menu menu-footer">
+                        <ul class="menu-footer__list">
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">About Us</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">Carrier</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">We are hiring</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                
+                <div class="footer__column">
+                    <div class="footer__label">TASKstart</div>
+                    <div class="footer__contacts contacts-footer">
+                    
+                    </div>
+                </div>
+            </div>
+         </div>
+        </div>
+    
+    <div class="footer__buttom">
+        <div class="footer__container _container">
+            <div class="footer__copy">Добро пожаловать к нам </div>
+            <div class="footer__social social">
+                <a href="" class="social__item"><img src="{% static 'images/ico/01.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/02.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/03.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/04.svg' %}" alt="social"></a>
+            </div>
+
+        </div>
+    </div>
+</footer>
+</div>
+</body>
+</html>

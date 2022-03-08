@@ -1,0 +1,203 @@
+{% load static %}
+{% load task_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type = "text/css" href = "{% static 'css/edit.css' %}" rel = "stylesheet"/>
+    <title>{{title}}</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header__container _container">
+          <a href="{% url 'home' %}" class="header__logo">TASKstart</a>
+          <nav class="header__menu menu">
+            <ul class="menu__list">
+                {% if request.user.is_authenticated %}
+                    <li class="menu__item">
+                        <a href="{% url 'profile' %}" class="menu__link">{{user.username}}</a> | <a class="menu__link-btr" href="{% url 'logout' %}">Выйти</a>
+                    </li>
+
+                    {% else %}
+                    <li class="menu__item">
+                        <a href="{% url 'invate' %}" class="menu__link-btr">Вход</a>
+                    </li>
+                    <li class="menu__item">
+                        <a href="{% url 'register' %}" class="menu__link-btr">Регистрация</a>
+                    </li>
+                {% endif %}
+            </ul>
+          </nav>
+        </div>
+    </header>
+
+<section>
+    <div class="_container">
+        <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="craft">
+                <div class="craft_title"><span>1</span>Основа</div>
+                
+                <div class="craft_nazvanie">
+                    <div class="form-error">{{ user_form.non_field_errors }}</div>
+                    <p class="form-label-all"><label class="form-label" for="{{ user_form.username.id_for_label }}">{{user_form.username.label}}: </label>{{ user_form.username }}</p>
+                    <div class="form-error">{{ user_form.username.errors }}</div>
+                </div>
+
+                <div class="craft_nazvanie">
+                    <div class="form-error">{{ user_form.non_field_errors }}</div>
+                    <p class="form-label-all"><label class="form-label" for="{{ user_form.email.id_for_label }}">{{user_form.email.label}}: </label>{{ user_form.email }}</p>
+                    <div class="form-error">{{ user_form.email.errors }}</div>
+                </div>
+
+            </div>
+
+            <div class="craft">
+                <div class="craft_title"><span>2</span>Профиль</div>
+
+                    <div class="craft_nazvanie">
+                        <div class="form-error">{{ profile_form.non_field_errors }}</div>
+                        <p class="form-label-all"><label class="form-label" for="{{ profile_form.name.id_for_label }}">{{profile_form.name.label}}: </label>{{ profile_form.name }}</p>
+                        <div class="form-error">{{ profile_form.name.errors }}</div>
+                    </div>
+
+                    <div class="craft_nazvanie">
+                        <div class="form-error">{{ profile_form.non_field_errors }}</div>
+                        <p><label class="form-label" for="{{ profile_form.surname.id_for_label }}">{{profile_form.surname.label}}: </label>{{ profile_form.surname }}</p>
+                        <div class="form-error">{{ profile_form.surname.errors }}</div>
+                    </div>
+
+                    <div class="form-error">{{ profile_form.non_field_errors }}</div>
+                        <p class="form-label-all"><label class="form-label" for="{{ profile_form.about.id_for_label }}">{{profile_form.about.label}}: </label>{{ profile_form.about }}</p>
+                    <div class="form-error">{{ profile_form.about.errors }}</div>
+
+                    <div class="form-error">{{ profile_form.non_field_errors }}</div>
+                        <p class="form-label-all"><label class="form-label" for="{{ profile_form.avatar.id_for_label }}">{{profile_form.avatar.label}}: </label>{{ profile_form.avatar }}</p>
+                    <div class="form-error">{{ profile_form.avatar.errors }}</div>
+
+                    <div class="craft_nazvanie">
+                        <div class="form-error">{{ profile_form.non_field_errors }}</div>
+                        <p><label class="form-label" for="{{ profile_form.experience.id_for_label }}">{{profile_form.experience.label}}: </label>{{ profile_form.experience }}</p>
+                        <div class="form-error">{{ profile_form.experience.errors }}</div>
+                    </div>
+
+                    <div class="craft_nazvanie">
+                        <div class="form-error">{{ profile_form.non_field_errors }}</div>
+                        <p><label class="form-label" for="{{ profile_form.launguage.id_for_label }}">{{profile_form.launguage.label}}: </label>{{ profile_form.launguage }}</p>
+                        <div class="form-error">{{ profile_form.launguage.errors }}</div>
+                    </div>
+
+                    <div class="craft_nazvanie">
+                        <div class="form-error">{{ profile_form.non_field_errors }}</div>
+                        <p><label class="form-label" for="{{ profile_form.phone_number.id_for_label }}">{{profile_form.phone_number.label}}: </label>{{ profile_form.phone_number }}</p>
+                        <div class="form-error">{{ profile_form.phone_number.errors }}</div>
+                    </div>
+
+
+                    <div class="craft_nazvanie">
+                        <div class="form-error">{{ profile_form.non_field_errors }}</div>
+                        <p><label class="form-label" for="{{ profile_form.instagram.id_for_label }}">{{profile_form.instagram.label}}: </label>{{ profile_form.instagram }}</p>
+                        <div class="form-error">{{ profile_form.instagram.errors }}</div>
+                    </div>
+
+
+                    <div class="craft_nazvanie">
+                        <div class="form-error">{{ profile_form.non_field_errors }}</div>
+                        <p><label class="form-label" for="{{ profile_form.twitter.id_for_label }}">{{profile_form.twitter.label}}: </label>{{ profile_form.twitter }}</p>
+                        <div class="form-error">{{ profile_form.twitter.errors }}</div>
+                    </div>
+
+
+                    <div class="craft_nazvanie">
+                        <div class="form-error">{{ profile_form.non_field_errors }}</div>
+                        <p><label class="form-label" for="{{ profile_form.facebook.id_for_label }}">{{profile_form.facebook.label}}: </label>{{ profile_form.facebook }}</p>
+                        <div class="form-error">{{ profile_form.facebook.errors }}</div>
+                    </div>
+
+
+                    <button type="submit" class="craft_button">Редактивировать</button>
+
+            </div>
+        </form>
+    </div>
+</section>
+<footer class="footer">
+    <div class="footer__top">
+        <div class="footer__main _container">
+            <div class="footer__row">
+                <div class="footer__column">
+                    <div class="footer__label">Company Info</div>
+                    <nav class="footer__menu menu-footer">
+                        <ul class="menu-footer__list">
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">About Us</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">Carrier</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">We are hiring</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer__column">
+                    <div class="footer__label">Legal</div>
+                    <nav class="footer__menu menu-footer">
+                        <ul class="menu-footer__list">
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">About Us</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">Carrier</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">We are hiring</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                <div class="footer__column">
+                    <div class="footer__label">Features</div>
+                    <nav class="footer__menu menu-footer">
+                        <ul class="menu-footer__list">
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">About Us</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">Carrier</a>
+                            </li>
+                            <li class="menu-footer__item">
+                                <a href="" class="menu-footer__link">We are hiring</a>
+                            </li>
+                            
+                        </ul>
+                    </nav>
+                </div>
+                
+                <div class="footer__column">
+                    <div class="footer__label">TASKstart</div>
+                    <div class="footer__contacts contacts-footer"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer__buttom">
+        <div class="footer__container _container">
+            <div class="footer__copy">Добро пожаловать к нам </div>
+            <div class="footer__social social">
+                <a href="" class="social__item"><img src="{% static 'images/ico/01.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/02.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/03.svg' %}" alt="social"></a>
+                <a href="" class="social__item"><img src="{% static 'images/ico/04.svg' %}" alt="social"></a>
+            </div>
+
+        </div>
+    </div>
+</footer>
+</body>
+</html>
