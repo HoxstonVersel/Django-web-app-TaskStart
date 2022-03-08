@@ -1,0 +1,163 @@
+body {
+    margin: 0;
+    font-family: 'Montserrat';
+    
+    
+    
+   
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+
+
+/* Container */
+.container {
+    
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    width: 100%;
+    
+    background-color: #282828;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+.header__logo {
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    
+    
+}
+
+
+
+/* Nav */
+.nav {
+    font-size: 15px;
+    font-weight: 500;
+   
+   
+}
+
+.nav__link {
+    color: #fff;
+    text-decoration: none;
+   
+    justify-content: center;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0 15px;
+    position: relative;
+    transition: color .1s linear;
+    
+}
+
+.nav__link:hover {
+    color:#FF5A25 ;
+ 
+}
+/*vhod*/
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+
+    background: url("../images/vhod.jpg") center no-repeat;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+.box {
+   
+    width: 470px;
+    height: 400px;
+    padding: 40px;
+    
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    background: #fff;
+    border-radius: 30px;
+}
+.vhod{
+    text-decoration: none;
+    color: #282828;
+    font-size: 25px;
+    font-weight: 600;
+    padding: 10px;
+
+}
+.vhod:hover{
+    text-decoration : underline;
+     
+    
+
+}
+
+
+.box input[type="text"],.box input[type="password"],.box input[type="ppassword"]{
+    border: 2px solid #FF5A25;
+    border-radius: 20px;
+    display: block;
+    margin: 20px auto;
+    padding: 14px 10px;
+    width: 300px;
+    outline: none;
+    color: #282828;
+}    
+ .box input[type="submit"]{
+    padding: 8px 30px;
+    border: 2px solid #FF5A25;
+    border-radius: 50px;
+    margin: 20px auto;
+    font-size: 14px;
+    font-weight: 800;
+    color:  #282828;
+    text-decoration: none;
+    transition: background .1s linear, 
+    color .1s linear;
+
+}
+
+
+ .box input[type="submit"]:hover {
+    background-color: #FF5A25;
+    color: #fff;
+    border: 2px solid #FF5A25;
+
+ }
+
+ .chat{
+    background: #fff;
+    color:#282828;
+	line-height: 171%;
+	font-weight: 600;
+    padding: 5px 20px;
+    border-radius: 30px;
+    border: 2px solid #fff;
+    transition: all 0.3s;
+}
